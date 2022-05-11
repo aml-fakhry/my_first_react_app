@@ -21,9 +21,7 @@ export default class Test extends React.Component {
     return (
       <React.Fragment>
         {this.props.names.map((name, idx) => (
-          <h1 key={idx} className={`testStyle ${colorClass}`}>
-            HALLO REACT YA {name}
-          </h1>
+          <NiceText idx={idx} colorClass={colorClass} name={name} />
         ))}
         <button className='changeClr' onClick={this.pressed}>
           {`change Color to ${colorToggle}`}
@@ -31,4 +29,12 @@ export default class Test extends React.Component {
       </React.Fragment>
     );
   }
+}
+
+function NiceText(props) {
+  return (
+    <h1 key={props.idx} className={`testStyle ${props.colorClass}`}>
+      HALLO REACT YA {props.name}
+    </h1>
+  );
 }
