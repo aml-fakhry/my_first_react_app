@@ -1,8 +1,15 @@
 .testStyle{
-    color: red;
     background-color: azure;
     align-items: center;
 }
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
 .changeClr{
     background-color: greenyellow;
     height: 30px;
