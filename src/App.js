@@ -1,12 +1,20 @@
+import React from 'react';
 import Test from './components/test/Test';
 import './App.css';
 
-function App() {
-  return (
-    <div className='App'>
-      <Test names={['BADRO', 'BASMO']} />
-    </div>
-  );
-}
+export default class App extends React.Component {
+  componentDidMount() {
+    console.log('App  is ready');
+  }
 
-export default App;
+  componentDidUpdate() {
+    console.log('App updated');
+  }
+  render() {
+    return (
+      <div className='App'>
+        <Test names={['BADRO', 'BASMO']} />
+      </div>
+    );
+  }
+}

@@ -1,11 +1,21 @@
 import React from 'react';
 import './Test.css';
+import NiceText from './../niceText/NiceText';
+
 export default class Test extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       color: 'red',
     };
+  }
+
+  componentDidMount() {
+    console.log('Test is ready');
+  }
+
+  componentDidUpdate() {
+    console.log('Test updated');
   }
 
   pressed = () => {
@@ -21,7 +31,7 @@ export default class Test extends React.Component {
     return (
       <React.Fragment>
         {this.props.names.map((name, idx) => (
-          <NiceText idx={idx} colorClass={colorClass} name={name} />
+          <NiceText key={idx} idx={idx} colorClass={colorClass} name={name} />
         ))}
         <button className='changeClr' onClick={this.pressed}>
           {`change Color to ${colorToggle}`}
@@ -30,11 +40,11 @@ export default class Test extends React.Component {
     );
   }
 }
-
+/*
 function NiceText(props) {
   return (
     <h1 key={props.idx} className={`testStyle ${props.colorClass}`}>
       HALLO REACT YA {props.name}
     </h1>
   );
-}
+} */
