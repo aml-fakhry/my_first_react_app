@@ -3,6 +3,7 @@ import './Test.css';
 import NiceText from './../niceText/NiceText';
 
 export default class Test extends React.Component {
+  intervalId;
   constructor(props) {
     super(props);
     this.state = {
@@ -13,6 +14,12 @@ export default class Test extends React.Component {
 
   componentDidMount() {
     console.log('Test is ready');
+
+    this.intervalId = setInterval(() => {
+      this.setState({
+        color: this.state.color === 'red' ? 'green' : 'red',
+      });
+    }, 1000);
   }
 
   componentDidUpdate() {
@@ -22,14 +29,13 @@ export default class Test extends React.Component {
   pressed = () => {
     console.log('pressed.');
     this.setState({
-      // color: this.state.color === 'red' ? 'green' : 'red',
       showText: !this.state.showText,
     });
   };
 
   render() {
     const colorClass = this.state.color;
-    const colorToggle = this.state.color === 'red' ? 'green' : 'red';
+
     return (
       <React.Fragment>
         {this.state.showText &&
@@ -37,7 +43,7 @@ export default class Test extends React.Component {
             <NiceText key={idx} idx={idx} colorClass={colorClass} name={name} />
           ))}
         <button className='changeClr' onClick={this.pressed}>
-          {`change Color to ${colorToggle}`}
+          {`toggle text`}
         </button>
       </React.Fragment>
     );
