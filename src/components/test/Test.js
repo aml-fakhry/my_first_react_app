@@ -4,16 +4,27 @@ import NiceText from './../niceText/NiceText';
 
 export default class Test extends React.Component {
   intervalId;
+
   constructor(props) {
     super(props);
     this.state = {
       color: 'red',
       showText: true,
+      data: {},
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     console.log('Test is ready');
+
+    const dataFromApi = await (
+      await fetch('https://jsonplaceholder.typicode.com/users/1')
+    ).json();
+
+    dataFromApi &&
+      this.setState({
+        data: { ...dataFromApi },
+      });
 
     this.intervalId = setInterval(() => {
       this.state.showText &&
@@ -44,10 +55,20 @@ export default class Test extends React.Component {
 
     return (
       <React.Fragment>
-        {this.state.showText &&
-          this.props.names.map((name, idx) => (
-            <NiceText key={idx} idx={idx} colorClass={colorClass} name={name} />
-          ))}
+        {[
+          this.state.showText && (
+            <NiceText colorClass={colorClass} name={this.state.data.name} />
+          ),
+          this.state.showText &&
+            this.props.names.map((name, idx) => (
+              <NiceText
+                key={idx}
+                idx={idx}
+                colorClass={colorClass}
+                name={name}
+              />
+            )),
+        ]}
         <button className='changeClr' onClick={this.pressed}>
           {`toggle text`}
         </button>
@@ -55,11 +76,3 @@ export default class Test extends React.Component {
     );
   }
 }
-/*
-function NiceText(props) {
-  return (
-    <h1 key={props.idx} className={`testStyle ${props.colorClass}`}>
-      HALLO REACT YA {props.name}
-    </h1>
-  );
-} */
