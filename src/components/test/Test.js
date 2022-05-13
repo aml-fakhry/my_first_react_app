@@ -16,14 +16,20 @@ export default class Test extends React.Component {
     console.log('Test is ready');
 
     this.intervalId = setInterval(() => {
-      this.setState({
-        color: this.state.color === 'red' ? 'green' : 'red',
-      });
+      this.state.showText &&
+        this.setState({
+          color: this.state.color === 'red' ? 'green' : 'red',
+        });
     }, 1000);
   }
 
   componentDidUpdate() {
     console.log('Test updated');
+  }
+
+  componentWillUnmount() {
+    console.log('clear intervals');
+    clearInterval(this.intervalId);
   }
 
   pressed = () => {
