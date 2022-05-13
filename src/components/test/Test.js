@@ -17,15 +17,6 @@ export default class Test extends React.Component {
   async componentDidMount() {
     console.log('Test is ready');
 
-    const dataFromApi = await (
-      await fetch('https://jsonplaceholder.typicode.com/users/1')
-    ).json();
-
-    dataFromApi &&
-      this.setState({
-        data: { ...dataFromApi },
-      });
-
     this.intervalId = setInterval(() => {
       this.state.showText &&
         this.setState({
@@ -54,25 +45,14 @@ export default class Test extends React.Component {
     const colorClass = this.state.color;
 
     return (
-      <React.Fragment>
-        {[
-          this.state.showText && (
-            <NiceText colorClass={colorClass} name={this.state.data.name} />
-          ),
-          this.state.showText &&
-            this.props.names.map((name, idx) => (
-              <NiceText
-                key={idx}
-                idx={idx}
-                colorClass={colorClass}
-                name={name}
-              />
-            )),
-        ]}
+      <div>
+        {this.state.showText && (
+          <NiceText colorClass={colorClass} name={this.props.name} />
+        )}
         <button className='changeClr' onClick={this.pressed}>
           {`toggle text`}
         </button>
-      </React.Fragment>
+      </div>
     );
   }
 }
