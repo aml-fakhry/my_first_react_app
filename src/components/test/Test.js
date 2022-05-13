@@ -32,11 +32,10 @@ export default class Test extends React.Component {
     const colorToggle = this.state.color === 'red' ? 'green' : 'red';
     return (
       <React.Fragment>
-        {this.props.names.map((name, idx) =>
-          this.state.showText ? (
+        {this.state.showText &&
+          this.props.names.map((name, idx) => (
             <NiceText key={idx} idx={idx} colorClass={colorClass} name={name} />
-          ) : null
-        )}
+          ))}
         <button className='changeClr' onClick={this.pressed}>
           {`change Color to ${colorToggle}`}
         </button>
